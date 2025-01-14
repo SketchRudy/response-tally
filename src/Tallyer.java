@@ -95,6 +95,21 @@ public class Tallyer {
             userVotes.get(id).add(topic);
         }
 
-        
+        // users who voted exactly twice
+        for (String id : userVotes.keySet()) {
+            List<String> votes = userVotes.get(id);
+
+            if (votes.size() == 2) {
+                for (String vote : votes) {
+                    if (!filteredCounts.containsKey(vote)) {
+                        filteredCounts.put(vote, 1);
+                    } else {
+                        filteredCounts.put(vote, filteredCounts.get(vote) + 1);
+                    }
+                }
+            }
+        }
+
+        return filteredCounts;
   }
 }
